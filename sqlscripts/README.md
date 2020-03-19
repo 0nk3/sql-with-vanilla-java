@@ -1,3 +1,9 @@
+## NOTE WELL
+THe commented out section on the JDBCExecutor can only be run once since you will
+be doing some kind of an update on the actual database. 
+Iy you, say, try to update information on a user that is non existent, youll get an error. 
+
+##      IF YOU USE DOCKER!
 # Order of operations
 These commands are for linux/Mac, changes will need to made if you are running this in Microsoft Windows.
 

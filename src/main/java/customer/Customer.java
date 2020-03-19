@@ -1,9 +1,8 @@
 package customer;
 
-import customer.utilities.DataTransferObject;
 
 // Customer model
-public class Customer implements DataTransferObject {
+public class Customer {
     private int customerId;
     private String
                     firstName,
