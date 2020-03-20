@@ -18,6 +18,6 @@ class DataBaseConnectionManager {
     }
 
     Connection getConnection() throws SQLException{
-        return DriverManager.getConnection(this.url, this.properties); // getCon returns the connection object
+        return DriverManager.getConnection(this.url, this.properties); // getConnection returns the connection object
     }
 }

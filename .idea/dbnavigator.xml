@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="bbf86bc0-4629-40fb-973d-45f0f7ebb4e6">
-        <schema name="phpmyadmin" object-types="view, table" />
+        <schema name="Umuzi" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
