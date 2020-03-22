@@ -12,7 +12,7 @@ public class JDBCExecutor {
                 Connection connection = localCon.getConnection()
 
         ){
-            logger.info("Connection to the datbase established at 127.0.0.1 . . .");
+            logger.info("Connection to the database established at 127.0.0.1 . . .");
 
             System.out.println("=========================================== 1 ==============================================================");
             //1. SELECT ALL records from table Customers.
@@ -27,8 +27,9 @@ public class JDBCExecutor {
                     System.out.println(resultSet.getInt("customerId") + ", " + resultSet.getString("firstname") + ", " + resultSet.getString("lastname") + ", "
                             + resultSet.getString("gender") + ", " + resultSet.getString("Address") + ", " + resultSet.getString("Phone") +
                             ", " + resultSet.getString("Email") + ", " + resultSet.getString("City") + ", " + resultSet.getString("Country"));
-                    logger.info("Database read successfully");
+
                 }
+                logger.info("Database read successfully");
 
             }catch (SQLException e){
                 logger.error(e.getMessage());
@@ -45,6 +46,7 @@ public class JDBCExecutor {
                 while (resultSet1.next()){
                     System.out.println(resultSet1.getString("firstname"));
                 }
+                logger.info("firstnames read successfully");
             }catch (SQLException e1){
                 logger.error(e1.getMessage());
             }
@@ -59,6 +61,7 @@ public class JDBCExecutor {
                 while (resultSet2.next()){
                     System.out.println(resultSet2.getString("firstname"));
                 }
+                logger.info("User data for customer with customer Id of 1 read successfully");
             }catch (SQLException e2){
                 logger.error(e2.getMessage());
             }
@@ -81,7 +84,9 @@ public class JDBCExecutor {
                 Statement statement4 = connection.createStatement();
                 int delete = statement4.executeUpdate(DELETE_CUSTOMER);  //remove user
                 System.out.println("Number of row affected : " + delete);
-            }catch (SQLException e4){
+                logger.info("Customer with Id of 2 successfully removed from the database");
+            }
+            catch (SQLException e4){
                 System.err.println("Customer cannot be deleted");
                 logger.error(e4.getMessage());
             }
@@ -115,7 +120,7 @@ public class JDBCExecutor {
             }
             System.out.println("=========================================== END ==============================================================");
         }catch (SQLException sql){
-            logger.fatal("There was a problem the database");
+            logger.fatal("There was a problem in connecting to the database. check your config files, check if server is running, ports etc");
             sql.printStackTrace();
         }
     }
