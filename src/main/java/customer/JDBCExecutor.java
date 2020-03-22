@@ -1,15 +1,18 @@
 package customer;
 
+import org.apache.logging.log4j.LogManager;
 import java.sql.*;
+import org.apache.logging.log4j.Logger;
 
 public class JDBCExecutor {
+    private static final Logger logger = LogManager.getLogger(JDBCExecutor.class.getName());
     public static void main(String ... args) {
         DataBaseConnectionManager localCon = new DataBaseConnectionManager("localhost", "Umuzi","dbuser", "dbuser123");
         try(
                 Connection connection = localCon.getConnection()
 
         ){
-            System.out.println("Connection established on 127.0.0.1 . . .\n");
+            logger.info("Connection to the datbase established at 127.0.0.1 . . .");
 
             System.out.println("=========================================== 1 ==============================================================");
             //1. SELECT ALL records from table Customers.
@@ -23,6 +26,7 @@ public class JDBCExecutor {
                         + resultSet.getString("gender") + ", " + resultSet.getString("Address") + ", " + resultSet.getString("Phone") +
                         ", " + resultSet.getString("Email") + ", " + resultSet.getString("City") + ", " + resultSet.getString("Country"));
             }
+            logger.info("Database read successfully");
             System.out.println("=========================================== 2 ==============================================================");
             //2. SELECT records only from the name column in the Customers table.
             final String SELECT_NAME = "SELECT firstname FROM customer";
@@ -75,6 +79,7 @@ public class JDBCExecutor {
             }
             System.out.println("=========================================== END ==============================================================");
         }catch (SQLException sql){
+            logger.fatal("There was a problem in connection to the database");
             sql.printStackTrace();
         }
     }
