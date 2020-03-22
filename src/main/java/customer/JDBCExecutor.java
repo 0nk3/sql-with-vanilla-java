@@ -13,14 +13,12 @@ public class JDBCExecutor {
 
         ){
             logger.info("Connection to the database established at 127.0.0.1 . . .");
-
             System.out.println("=========================================== 1 ==============================================================");
             //1. SELECT ALL records from table Customers.
             final String GET_ALL = "SELECT * FROM customer";
             try(
                     Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
             ) {
-
                 // execute Query is for read only sql statement. result is rows and column. v execute Update for Update/Insert/Delete in CRUD
                 ResultSet resultSet = statement.executeQuery(GET_ALL);
                 while (resultSet.next()) {
@@ -29,19 +27,17 @@ public class JDBCExecutor {
                             ", " + resultSet.getString("Email") + ", " + resultSet.getString("City") + ", " + resultSet.getString("Country"));
 
                 }
-                logger.info("Database read successfully");
+                logger.info("Database read successfully!");
 
             }catch (SQLException e){
                 logger.error(e.getMessage());
             }
-
             System.out.println("=========================================== 2 ==============================================================");
             //2. SELECT records only from the name column in the Customers table.
             final String SELECT_NAME = "SELECT firstname FROM customer";
             try(
                     Statement statement1 = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ){
-
                 ResultSet resultSet1 = statement1.executeQuery(SELECT_NAME);
                 while (resultSet1.next()){
                     System.out.println(resultSet1.getString("firstname"));
@@ -56,7 +52,6 @@ public class JDBCExecutor {
             try(
                     Statement statement2 = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ){
-
                 ResultSet resultSet2 = statement2.executeQuery(SHOW_CUSTOMER);
                 while (resultSet2.next()){
                     System.out.println(resultSet2.getString("firstname"));
@@ -68,8 +63,10 @@ public class JDBCExecutor {
             System.out.println("=========================================== 4 ==============================================================");
             //4. UPDATE the record for CustomerID = 1 on the Customer table so that the name is “Lerato Mabitso”.
             final String UPDATE_USER = "UPDATE customer SET firstname = Lerato, lastname = Mabitso WHERE customerid = 1 ";
-            try {
-                Statement statement3 = connection.createStatement();
+            try (
+                    Statement statement3 = connection.createStatement()
+            ){
+
                 int update = statement3.executeUpdate(UPDATE_USER);   // update user information
                 System.out.println("Number of row affected : " + update);
             }catch (SQLException e3){
@@ -79,9 +76,9 @@ public class JDBCExecutor {
             System.out.println("=========================================== 5 ==============================================================");
             //5. DELETE the record from the Customers table for customer 2 (CustomerID = 2)
             final String DELETE_CUSTOMER = "DELETE FROM customer WHERE customerid = 2";
-            try {
-
-                Statement statement4 = connection.createStatement();
+            try (
+                    Statement statement4 = connection.createStatement()
+            ){
                 int delete = statement4.executeUpdate(DELETE_CUSTOMER);  //remove user
                 System.out.println("Number of row affected : " + delete);
                 logger.info("Customer with Id of 2 successfully removed from the database");
@@ -96,7 +93,6 @@ public class JDBCExecutor {
             try(
                     Statement statement5 = connection.createStatement();
             ){
-
                 ResultSet resultSet5 = statement5.executeQuery(SELECT_UNIQUE);
                 while (resultSet5.next()){
                     System.out.println(resultSet5.getInt(1));
@@ -110,7 +106,6 @@ public class JDBCExecutor {
             try(
                     Statement statement7 = connection.createStatement();
             ) {
-
                 ResultSet resultSet7 = statement7.executeQuery(SELECT_MAX);
                 while (resultSet7.next()) {
                     System.out.println(resultSet7.getInt(1));
